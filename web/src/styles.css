@@ -1,0 +1,110 @@
+/* 紫队实验台 · 黑金主题（与博客/记账本同一视觉语言） */
+:root {
+  --bg: #0d0b09;
+  --bg-2: #14100b;
+  --card: #1a1610;
+  --line: #2b2418;
+  --gold: #f5a623;
+  --gold-soft: #f7c976;
+  --ink: #f6f0e4;
+  --ink-2: #b8ac95;
+  --ink-3: #7d7262;
+  --ok: #35d17a;
+  --warn: #e56b5a;
+  --radius: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+button { font-family: inherit; }
+.shell { min-height: 100vh; display: flex; flex-direction: column; }
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 22px; height: 60px; padding: 0 24px;
+  background: rgba(13, 11, 9, 0.85); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; }
+.brand-mark {
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--gold), #d98912);
+  color: var(--bg); font-size: 16px; font-weight: 800;
+}
+.brand-text em { font-style: normal; font-size: 12px; color: var(--ink-3); margin-left: 6px; font-weight: 400; }
+.nav { display: flex; gap: 4px; margin-left: 8px; }
+.nav a { padding: 8px 14px; border-radius: 8px; color: var(--ink-2); font-size: 14px; }
+.nav a:hover { color: var(--ink); background: rgba(245, 166, 35, 0.08); }
+.nav a.on { color: var(--gold); background: rgba(245, 166, 35, 0.12); }
+.topbar .gh { margin-left: auto; font-size: 13px; color: var(--ink-3); }
+.topbar .gh:hover { color: var(--gold); }
+
+.main { flex: 1; width: 100%; max-width: 1020px; margin: 0 auto; padding: 28px 20px 60px; }
+.page-title { font-size: 22px; margin-bottom: 4px; }
+.page-sub { color: var(--ink-3); font-size: 13px; margin-bottom: 20px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+
+/* 场景网格 */
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.toolbar .hint { color: var(--ink-3); font-size: 13px; }
+.scen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.scen {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px; cursor: pointer; position: relative; transition: border-color .15s, box-shadow .15s;
+}
+.scen:hover { border-color: rgba(245, 166, 35, .5); }
+.scen.checked { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(245, 166, 35, .35), 0 8px 28px -14px rgba(245, 166, 35, .4); }
+.scen-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.scen-desc { font-size: 13px; color: var(--ink-2); margin-bottom: 10px; line-height: 1.5; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { display: inline-block; background: rgba(245, 166, 35, .12); color: var(--gold-soft); border-radius: 6px; padding: 2px 8px; font-size: 12px; }
+.tag.tactic { background: rgba(53, 209, 122, .1); color: var(--ok); }
+.tag.sev-high { background: rgba(229, 107, 90, .12); color: var(--warn); }
+.check { position: absolute; top: 14px; right: 14px; width: 18px; height: 18px; border-radius: 5px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--bg); font-size: 12px; }
+.scen.checked .check { background: var(--gold); border-color: var(--gold); }
+
+.btn { border: none; border-radius: 9px; padding: 11px 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.btn-primary { background: linear-gradient(135deg, var(--gold), #d98912); color: #1a120a; }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { background: var(--bg-2); border: 1px solid var(--line); color: var(--ink-2); }
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink-3); }
+
+.result-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.chip { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.chip .label { font-size: 12px; color: var(--ink-3); margin-bottom: 6px; }
+.chip .value { font-size: 24px; font-weight: 700; }
+.chip.hit .value { color: var(--ok); }
+.chip.miss .value { color: var(--warn); }
+.chip.cov .value { color: var(--gold); }
+
+/* 表格 */
+table.t { width: 100%; border-collapse: collapse; }
+table.t th { text-align: left; font-size: 12px; color: var(--ink-3); font-weight: 400; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+table.t td { padding: 11px 10px; border-bottom: 1px solid rgba(43, 36, 24, .6); font-size: 14px; vertical-align: top; }
+table.t tr:hover td { background: rgba(245, 166, 35, .04); }
+.pill { display: inline-block; border-radius: 6px; padding: 2px 9px; font-size: 12px; }
+.pill.hit { background: rgba(53, 209, 122, .12); color: var(--ok); }
+.pill.miss { background: rgba(229, 107, 90, .12); color: var(--warn); }
+.detail-dim { color: var(--ink-2); font-size: 13px; line-height: 1.55; }
+.runs-row { cursor: pointer; }
+
+/* 报告页 */
+.coverage-ring { width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 12px; }
+.coverage-ring .num { font-size: 30px; font-weight: 800; color: var(--gold); }
+.tactic-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.tactic-bar .tname { width: 200px; font-size: 13px; color: var(--ink-2); flex-shrink: 0; }
+.tactic-bar .track { flex: 1; height: 12px; background: var(--bg-2); border-radius: 99px; overflow: hidden; }
+.tactic-bar .fill { height: 100%; background: linear-gradient(90deg, var(--gold), #d98912); border-radius: 99px; }
+.gap-card { border-left: 3px solid var(--warn); }
+.empty { text-align: center; color: var(--ink-3); padding: 40px 0; font-size: 14px; }
+.picked { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+@media (max-width: 640px) {
+  .result-summary { grid-template-columns: 1fr 1fr; }
+  .tactic-bar .tname { width: 120px; }
+  .scen-grid { grid-template-columns: 1fr; }
+}
