@@ -1,0 +1,19 @@
+{
+  "name": "purple-team-server",
+  "version": "1.0.0",
+  "description": "紫队检测验证实验台 · 后端（Express + SQLite + Sigma-lite 匹配引擎，纯离线数据模拟）",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

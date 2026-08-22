@@ -1,0 +1,121 @@
+[
+  {
+    "slug": "R001",
+    "title": "SQL 注入攻击检测（UNION/信息窃取）",
+    "scenario": "sqli-union",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["SQL注入攻击", "SQL注入"] },
+      { "field": "告警描述", "op": "contains", "values": ["union select", "information_schema", "or 1=1"] }
+    ]
+  },
+  {
+    "slug": "R002",
+    "title": "SQL 时间盲注检测（sleep/延时函数）",
+    "scenario": "sqli-blind",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["SQL注入攻击"] },
+      { "field": "告警描述", "op": "regex", "values": ["sleep\\s*\\(|benchmark\\s*\\(", "SELECT\\s+SLEEP"] }
+    ]
+  },
+  {
+    "slug": "R003",
+    "title": "XSS 跨站脚本检测（明文特征）",
+    "scenario": "xss-reflected",
+    "level": "中危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["XSS跨站脚本攻击", "XSS攻击"] },
+      { "field": "告警描述", "op": "contains", "values": ["<script>", "javascript:", "onerror=", "<img src=x"] }
+    ]
+  },
+  {
+    "slug": "R004",
+    "title": "XSS 编码绕过检测（单层 URL 解码）",
+    "scenario": "xss-encoded",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警描述", "op": "contains", "values": ["<script>", "javascript:", "%3Cscript%3E", "%3C%2Fscript%3E"] }
+    ]
+  },
+  {
+    "slug": "R005",
+    "title": "Web 目录爆破扫描检测（404 高频）",
+    "scenario": "dir-bruteforce",
+    "level": "中危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["目录扫描行为", "路径扫描", "目录爆破"] },
+      { "field": "告警描述", "op": "contains", "values": ["404", "不存在路径", "敏感目录"] }
+    ]
+  },
+  {
+    "slug": "R006",
+    "title": "SSH 暴力破解检测（高频失败登录）",
+    "scenario": "ssh-bruteforce",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["SSH暴力破解", "暴力破解攻击"] },
+      { "field": "告警描述", "op": "regex", "values": ["登录失败|\\d+\\s*次", "SSH"] }
+    ]
+  },
+  {
+    "slug": "R007",
+    "title": "Web 登录爆破检测（集中失败）",
+    "scenario": "web-login-bruteforce",
+    "level": "中危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["登录爆破行为", "登录爆破", "暴力破解"] },
+      { "field": "告警描述", "op": "contains", "values": ["登录失败", "字典轮换"] }
+    ]
+  },
+  {
+    "slug": "R008",
+    "title": "Webshell 上传与冰蝎流量检测",
+    "scenario": "webshell-upload",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["Webshell上传行为", "Webshell检测", "恶意文件上传"] },
+      { "field": "告警描述", "op": "contains", "values": ["shell.php", ".php", ".jsp", "冰蝎"] }
+    ]
+  },
+  {
+    "slug": "R009",
+    "title": "反弹 Shell 检测（dev/tcp 特征）",
+    "scenario": "reverse-shell",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["反弹shell行为", "反弹shell"] },
+      { "field": "告警描述", "op": "regex", "values": ["/dev/tcp|bash\\s+-i|0>&1", ">&\\s*/dev/tcp"] }
+    ]
+  },
+  {
+    "slug": "R010",
+    "title": "PowerShell 编码命令执行检测",
+    "scenario": "powershell-encoded",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["可疑PowerShell执行", "PowerShell编码执行"] },
+      { "field": "告警描述", "op": "regex", "values": ["-enc\\s|Base64|powershell\\.exe"] }
+    ]
+  },
+  {
+    "slug": "R011",
+    "title": "横向移动检测（PSEXEC/SMB 服务特征）",
+    "scenario": "lateral-psexec",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["横向移动行为", "横向移动"] },
+      { "field": "告警描述", "op": "contains", "values": ["PSEXESVC", "SMB", "$ADMIN"] }
+    ]
+  },
+  {
+    "slug": "R012",
+    "title": "DNS 隧道检测（高熵域名模板特征）",
+    "scenario": "dns-tunnel",
+    "level": "高危",
+    "matchers": [
+      { "field": "告警名称", "op": "equals", "values": ["DNS隧道通信", "DNS隧道"] },
+      { "field": "告警描述", "op": "contains", "values": ["高熵域名", "域名熵值"] }
+    ]
+  }
+]
