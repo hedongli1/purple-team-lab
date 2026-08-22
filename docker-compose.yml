@@ -1,0 +1,19 @@
+services:
+  server:
+    build: ./server
+    ports:
+      - "3100:3100"
+    volumes:
+      - lab-data:/app/data
+    restart: unless-stopped
+
+  web:
+    build: ./web
+    ports:
+      - "8081:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+
+volumes:
+  lab-data:
