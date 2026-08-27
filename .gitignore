@@ -2,6 +2,12 @@ node_modules/
 dist/
 data/*.db
 data/*.db-*
+**/*.db-*
+**/data/*.db
+**/data/*.db-*
 *.log
 .DS_Store
 .env
+aiscan-results.json
+aiscan-results.sarif
+security-report.html

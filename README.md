@@ -11,8 +11,10 @@
 | 徽章 | 说明 |
 | --- | --- |
 | ![CI](https://img.shields.io/github/actions/workflow/status/hedongli1/purple-team-lab/ci.yml?branch=master&label=CI&logo=github) | 测试 + 构建流水线（Node 22/24，`npm test` 11 用例 + `vite build`），点击徽章可查看运行历史 |
+| ![aiscan](https://img.shields.io/github/actions/workflow/status/hedongli1/purple-team-lab/aiscan-security.yml?branch=master&label=aiscan%20security&logo=snyk) | [aiscan](https://github.com/hedongli1/aiscan) 静态安全审计（server/src，`fail-on: high`，每日自动扫描） |
 | ![tests](https://img.shields.io/badge/tests-11%20passed-brightgreen) | 端到端接口测试全部通过（`node --test`，零框架依赖） |
 | ![coverage](https://img.shields.io/badge/detection%20coverage-83%25-orange) | 12 个场景 → 10 命中 + 2 检测缺口（编码绕过 / DNS 隧道） |
+| ![aiscan-score](https://img.shields.io/badge/aiscan%20score-100%2FA-brightgreen) | [aiscan](https://github.com/hedongli1/aiscan) 审计结果：0 发现，安全评分 100/A（干净基线） |
 | ![license](https://img.shields.io/github/license/hedongli1/purple-team-lab) | MIT |
 
 > 本地复现：`cd server && npm install && npm test` → 11 个用例全部通过（需 Node ≥ 22）。
@@ -87,6 +89,14 @@ Docker 一键启动：`docker compose up -d` → 前端 http://localhost:8081
 - 自研规则匹配引擎，支持 equals/contains/regex 算子与 AND/OR 组合逻辑；通过受控实验识别出 2 类检测缺口（双重编码绕过、DNS 高熵隧道），并给出改进方案
 - 全过程纯离线数据模拟，以符合实际的模拟告警（含数据源、源/目的 IP、协议、告警描述等字段）驱动验证，将检测工程验证流程工程化、可复现
 - 编写 11 个端到端接口测试零依赖框架；前端 Vue3 黑金界面 + Docker Compose 一键部署
+
+## 🛡️ 安全审计基线（aiscan 对照案例）
+
+本仓库同时作为 [aiscan](https://github.com/hedongli1/aiscan)（AI 辅助代码安全审计）的**干净基线对照案例**：
+
+- 接入 `hedongli1/aiscan@v1` Action，对 `server/src` 做静态安全审查（每次 push + 每日凌晨 2 点自动扫描）
+- **审计结果：0 发现，安全评分 100/A** —— 作为与 ledger-app（曾检出 SQL 拼接风险信号）的对照组
+- 完整说明见 [GitHub 运营执行报告](https://github.com/hedongli1/hedongli1)
 
 ## 📄 License
 
