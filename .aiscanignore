@@ -1,1 +1,7 @@
 node_modules/
+
+# aiscan 忽略清单（purple-team-lab）— 2026-09-05 巡检补充
+# Report.vue / Runs.vue 的 GL-generic-api-key 命中实为 Vue 列表渲染 :key="..." 绑定，
+# 非真实密钥，已人工复核为误报（对应 aiscan issue #5）。
+web/src/views/Report.vue
+web/src/views/Runs.vue
